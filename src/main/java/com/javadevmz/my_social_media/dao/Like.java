@@ -3,13 +3,13 @@ package com.javadevmz.my_social_media.dao;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,4 +22,5 @@ public class Like extends BaseEntity<Long> {
     private Media media;
 
     private LocalDateTime time;
+
 }

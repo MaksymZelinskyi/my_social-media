@@ -1,17 +1,18 @@
 package com.javadevmz.my_social_media.dao;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = "replies")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 public class Comment extends Media{
 
     @ManyToOne
