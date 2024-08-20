@@ -1,28 +1,47 @@
 package com.javadevmz.my_social_media.controller;
 
 import com.javadevmz.my_social_media.dao.Post;
-import com.javadevmz.my_social_media.dao.repository.PostRepository;
+import com.javadevmz.my_social_media.service.CommentManager;
+import com.javadevmz.my_social_media.service.PostEntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.List;
+
+@RestController("/posts")
 @Transactional
 public class PostController {
 
     @Autowired
-    PostRepository postRepository;
+    PostEntityManager postEntityManager;
+    @Autowired
+    private CommentManager commentManager;
 
     @PostMapping("/posts")
-    public Post post(@RequestBody Post post) {
-        postRepository.save(post);
-        post.equals(new Object());
+    public Post postPost(@RequestBody Post post) {
+        postEntityManager.savePost(post);
         return post;
     }
+
+    @GetMapping("/posts")
+    public List<Post> getAllPosts() {
+        return postEntityManager.getAllPosts();
+    }
+
+    @GetMapping("/posts/{id}")
+    public Post getPostById(@PathVariable Long id) {
+       return postEntityManager.getPostById(id);
+    }
+
+    @PutMapping("/posts/{id}")
+    public Post updatePost(@PathVariable Long id, @RequestBody Post post) {
+        return postEntityManager.updatePost(id, post);
+    }
+
+    @DeleteMapping("/posts/{id}")
+    public void deletePost(@PathVariable Long id) {
+        postEntityManager.deletePost(id);
+    }
+
 }
