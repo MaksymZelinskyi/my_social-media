@@ -1,8 +1,7 @@
-package com.javadevmz.my_social_media.dao;
+package com.javadevmz.my_social_media.dao.entity;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.concurrent.TimeUnit;
 
 public record Birthday(LocalDate birthday) {
 

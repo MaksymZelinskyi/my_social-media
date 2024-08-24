@@ -1,6 +1,6 @@
 package com.javadevmz.my_social_media.dao.converter;
 
-import com.javadevmz.my_social_media.dao.Birthday;
+import com.javadevmz.my_social_media.dao.entity.Birthday;
 import jakarta.persistence.AttributeConverter;
 
 import java.time.LocalDate;

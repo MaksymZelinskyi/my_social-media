@@ -1,11 +1,12 @@
-package com.javadevmz.my_social_media.dao;
+package com.javadevmz.my_social_media.dao.entity;
 
+import com.javadevmz.my_social_media.dao.entity.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.validation.annotation.Validated;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "users")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = {"medias", "subscriptions", "followers", "likes"})
+@ToString(exclude = {"entrys", "subscriptions", "followers", "likes", "roles"})
 public class User extends BaseEntity<Long> {
 
     @Email
@@ -27,20 +28,37 @@ public class User extends BaseEntity<Long> {
     @Column(unique = true)
     private String email;
 
+    @NaturalId
+    @Column(unique = true)
+    @EqualsAndHashCode.Include
+    private String username;
+
+    @OneToOne
+    private Attachment profilePicture;
+
     private PersonalInfo personalInfo;
     private String password;
     private LocalDate registrationDate;
 
+
+    /*
+        Not used because fetching even a One-To-Many alternative of a self referencing  Many-to-Many
+        relation is not efficient, and it's better to use UserSubscription queries directly instead.
+        *kept for emphasis
+     */
     @OneToMany(mappedBy = "follower", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<UserSubscription> subscriptions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "followed", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "subscription", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<UserSubscription> followers = new ArrayList<>();
 
+    @OrderBy("publishedTime desc")
     @OneToMany(mappedBy = "author", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Media> medias = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     List<Like> likes = new ArrayList<>();
 
+    @OneToMany
+    private List<UserRole> roles = new ArrayList<>();
 }

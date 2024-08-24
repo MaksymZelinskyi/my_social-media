@@ -1,4 +1,4 @@
-package com.javadevmz.my_social_media.dao;
+package com.javadevmz.my_social_media.dao.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +18,6 @@ public class BaseEntity<I extends Serializable> {
 
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected I id;
 }
