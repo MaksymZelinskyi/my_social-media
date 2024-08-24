@@ -38,7 +38,7 @@ public class User extends BaseEntity<Long> {
 
     private PersonalInfo personalInfo;
     private String password;
-    private LocalDate registrationDate;
+    private LocalDate registrationDate = LocalDate.now();
 
 
     /*

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 public abstract class Entry extends BaseEntity<Long>{
 
