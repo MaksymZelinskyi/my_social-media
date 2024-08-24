@@ -1,4 +1,4 @@
-package com.javadevmz.my_social_media.dao;
+package com.javadevmz.my_social_media.dao.entity;
 
 import com.javadevmz.my_social_media.dao.converter.BirthdayLocalDateConverter;
 import jakarta.persistence.*;
