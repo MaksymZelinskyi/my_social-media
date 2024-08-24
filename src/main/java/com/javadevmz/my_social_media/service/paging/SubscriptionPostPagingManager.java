@@ -1,7 +1,7 @@
 package com.javadevmz.my_social_media.service.paging;
 
-import com.javadevmz.my_social_media.dao.Post;
-import com.javadevmz.my_social_media.dao.User;
+import com.javadevmz.my_social_media.dao.entity.Post;
+import com.javadevmz.my_social_media.dao.entity.User;
 import com.javadevmz.my_social_media.dao.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
 @Service
 public class SubscriptionPostPagingManager extends PagingManager<Post, User>{
 

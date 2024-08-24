@@ -1,6 +1,6 @@
 package com.javadevmz.my_social_media.service;
 
-import com.javadevmz.my_social_media.dao.User;
+import com.javadevmz.my_social_media.dao.entity.User;
 import com.javadevmz.my_social_media.dao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

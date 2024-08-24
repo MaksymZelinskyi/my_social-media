@@ -1,11 +1,10 @@
 package com.javadevmz.my_social_media.service;
 
-import com.javadevmz.my_social_media.dao.Post;
+import com.javadevmz.my_social_media.dao.entity.Post;
 import com.javadevmz.my_social_media.dao.repository.PostRepository;
-import com.javadevmz.my_social_media.service.paging.SubscriptionPostPagingManager;
-import com.javadevmz.my_social_media.service.paging.UserPostPagingManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,29 +18,20 @@ public class PostManager{
     private PostRepository postRepository;
     @Autowired
     private UserManager userManager;
-    @Autowired
-    private UserPostPagingManager userPostPagingManager;
-    @Autowired
-    private SubscriptionPostPagingManager subscriptionPostPagingManager;
 
-    public List<Post> getNext20UserPosts(Long userId){
-        Sort sort = Sort.by(Sort.Direction.DESC, "publishedTime");
-        return userPostPagingManager.getNextXByCriteria(userId, 20, sort);
+    public List<Post> get20PostsOfFriends(){
+       List<Post> posts = postRepository.findUnseenPostsOfFriends(userManager.getCurrentUser(), PageRequest.of(0, 20, Sort.by("publishedTime").descending()));
+       if(posts == null || posts.isEmpty()){
+           posts = postRepository.findPostsOfFriends(userManager.getCurrentUser(), PageRequest.of(0, 20, Sort.by("publishedTime").descending()));
+       }
+       return posts;
     }
 
-    public List<Post> getFirst20UserPosts(Long userId){
-        userPostPagingManager.refresh(userManager.getCurrentUser().getId());
-        return getNext20UserPosts(userId);
+    public List<Post> get25MostPopularPosts(){
+        List<Post> posts = postRepository.findMostPopularUnseenPosts(userManager.getCurrentUser(), PageRequest.ofSize(25));
+        if(posts == null || posts.isEmpty()){
+            posts = postRepository.findMostPopularPosts(PageRequest.ofSize(25));
+        }
+        return posts;
     }
-
-    public List<Post> getNext20UserSubscriptionsPosts(){
-        Sort sort = Sort.by(Sort.Direction.DESC, "published");
-        return subscriptionPostPagingManager.getNextXByCriteria(userManager.getCurrentUser(), 20, sort);
-    }
-
-    public List<Post> getFirst20UserSubscriptionsPosts(){
-        subscriptionPostPagingManager.refresh(userManager.getCurrentUser());
-        return getNext20UserSubscriptionsPosts();
-    }
-
 }

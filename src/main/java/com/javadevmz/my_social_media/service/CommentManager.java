@@ -1,10 +1,9 @@
 package com.javadevmz.my_social_media.service;
 
-import com.javadevmz.my_social_media.dao.Comment;
+import com.javadevmz.my_social_media.dao.entity.Comment;
 import com.javadevmz.my_social_media.dao.repository.CommentRepository;
 import com.javadevmz.my_social_media.service.paging.CommentPagingManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,17 +19,17 @@ public class CommentManager{
     @Autowired
     private CommentPagingManager pagingManager;
     @Autowired
-    private MediaManager mediaManager;
+    private ContentManager contentManager;
     @Autowired
     private UserManager userManager;
 
-    public List<Comment> getNext20MediaComments(Long mediaId, LocalDateTime lastCommentTime){
-        return commentRepository.findAllByCommented_IdAndPublishedTimeBefore(mediaId, lastCommentTime, 20);
+    public List<Comment> getNext20EntryComments(Long entryId, LocalDateTime lastCommentTime){
+        return commentRepository.findAllByCommented_IdAndPublishedTimeBefore(entryId, lastCommentTime, 20);
     }
 
-   /* public List<Comment> getFirst20MediaComments(Long mediaId){
-        pagingManager.refresh(mediaId);
-        return getNext20MediaComments(mediaId);
+   /* public List<Comment> getFirst20EntryComments(Long entryId){
+        pagingManager.refresh(entryId);
+        return getNext20EntryComments(entryId);
     }*/
 
     public Comment getById(Long id) {
@@ -40,13 +39,13 @@ public class CommentManager{
     public Comment add(Long commentedId, Comment postComment) {
         postComment.setPublishedTime(LocalDateTime.now());
         postComment.setLastEdit(LocalDateTime.now());
-        postComment.setCommented(mediaManager.getById(commentedId));
+        postComment.setCommented(contentManager.getById(commentedId));
         return commentRepository.save(postComment);
     }
 
     public Comment update(Long id, Comment comment){
         Comment oldComment = commentRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Comment not found"));
-        oldComment.setContent(comment.getContent());
+        oldComment.setText(comment.getText());
         oldComment.setLastEdit(LocalDateTime.now());
         oldComment.setAuthor(userManager.getCurrentUser());
         return oldComment;
