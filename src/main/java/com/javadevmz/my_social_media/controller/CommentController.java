@@ -1,6 +1,6 @@
 package com.javadevmz.my_social_media.controller;
 
-import com.javadevmz.my_social_media.dao.Comment;
+import com.javadevmz.my_social_media.dao.entity.Comment;
 import com.javadevmz.my_social_media.service.CommentManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class CommentController {
         if(lastCommentTime == null){
             lastCommentTime = LocalDateTime.now();
         }
-        return commentManager.getNext20MediaComments(postId, lastCommentTime);
+        return commentManager.getNext20EntryComments(postId, lastCommentTime);
     }
 
     @GetMapping("/posts/{postId}/comments/{id}")

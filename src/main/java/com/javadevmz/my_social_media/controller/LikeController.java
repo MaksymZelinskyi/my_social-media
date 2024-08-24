@@ -1,14 +1,11 @@
 package com.javadevmz.my_social_media.controller;
 
-import com.javadevmz.my_social_media.dao.Like;
+import com.javadevmz.my_social_media.dao.entity.Like;
 import com.javadevmz.my_social_media.service.LikeManager;
-import com.javadevmz.my_social_media.service.MediaManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -16,17 +13,15 @@ public class LikeController {
 
     @Autowired
     private LikeManager likeManager;
-    @Autowired
-    private MediaManager mediaManager;
 
     @GetMapping("/posts/{postId}/likes")
     public List<Like> getPostLikes(@PathVariable Long postId,
-                                   @RequestParam(required = false) Boolean scrolled)
+                                   @RequestParam(required = false) LocalDateTime oldestLikeTime)
     {
-       if(scrolled){
-           return likeManager.getNext30MediaLikes(postId);
+       if(oldestLikeTime ==null){
+           oldestLikeTime = LocalDateTime.now();
        }
-        return likeManager.getNext30MediaLikes(postId);
+        return likeManager.getNext30EntryLikes(postId, oldestLikeTime);
     }
 
     @GetMapping("/posts/{postId}/likes/count")
@@ -34,8 +29,28 @@ public class LikeController {
         return likeManager.getLikeCountByMediaId(postId);
     }
 
-    @GetMapping("/posts/{postId}/comments/{commentId}likes/count")
+    @GetMapping("/posts/{postId}/comments/{commentId}/likes/count")
     public Long getCommentLikeCount(@PathVariable Long commentId){
         return likeManager.getLikeCountByMediaId(commentId);
+    }
+
+    @PostMapping("/posts/{postId}/likes")
+    public void likePost(@PathVariable Long postId){
+        likeManager.addLike(postId);
+    }
+
+    @PostMapping("/posts/{postId}/comments/{commentId}/likes")
+    public void likeComment(@PathVariable Long commentId){
+        likeManager.addLike(commentId);
+    }
+
+    @DeleteMapping("/posts/{postId}/likes")
+    public void deletePostLike(@PathVariable Long postId){
+        likeManager.deleteLike(postId);
+    }
+
+    @DeleteMapping("/posts/{postId}/comments/{commentId}/likes")
+    public void deleteCommentLike(@PathVariable Long commentId){
+        likeManager.deleteLike(commentId);
     }
 }

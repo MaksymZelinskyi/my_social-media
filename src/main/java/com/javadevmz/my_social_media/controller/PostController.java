@@ -1,6 +1,6 @@
 package com.javadevmz.my_social_media.controller;
 
-import com.javadevmz.my_social_media.dao.Post;
+import com.javadevmz.my_social_media.dao.entity.Post;
 import com.javadevmz.my_social_media.service.CommentManager;
 import com.javadevmz.my_social_media.service.PostEntityManager;
 import org.springframework.beans.factory.annotation.Autowired;

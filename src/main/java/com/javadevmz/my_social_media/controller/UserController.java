@@ -1,6 +1,7 @@
 package com.javadevmz.my_social_media.controller;
 
-import com.javadevmz.my_social_media.dao.User;
+import com.javadevmz.my_social_media.dao.entity.User;
+import com.javadevmz.my_social_media.service.SubscriptionManager;
 import com.javadevmz.my_social_media.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ public class UserController {
 
     @Autowired
     private UserManager userManager;
+    @Autowired
+    private SubscriptionManager subscriptionManager;
 
     @PostMapping("/users")
     public void register(@RequestBody User user) {
@@ -25,4 +28,5 @@ public class UserController {
     public void deleteUser(@PathVariable Long id){
         userManager.deleteUser(id);
     }
+
 }
