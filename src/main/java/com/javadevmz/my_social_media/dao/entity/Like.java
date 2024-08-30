@@ -16,11 +16,11 @@ public class Like extends BaseEntity<Like.Id> {
     private Id id;
 
     @ManyToOne
-    @MapsId
+    @MapsId("userId")
     private User user;
 
     @ManyToOne
-    @MapsId
+    @MapsId("entryId")
     private Entry entry;
 
     private LocalDateTime time = LocalDateTime.now();
@@ -36,6 +36,6 @@ public class Like extends BaseEntity<Like.Id> {
     @AllArgsConstructor
     public static class Id implements Serializable {
         private Long userId;
-        private Long contentItemId;
+        private Long entryId;
     }
 }

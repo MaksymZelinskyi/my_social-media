@@ -59,6 +59,6 @@ public class User extends BaseEntity<Long> {
     @OneToMany(mappedBy = "user")
     List<Like> likes = new ArrayList<>();
 
-    @OneToMany
-    private List<UserRole> roles = new ArrayList<>();
+    @ElementCollection
+    private List<String> roles = new ArrayList<>();
 }

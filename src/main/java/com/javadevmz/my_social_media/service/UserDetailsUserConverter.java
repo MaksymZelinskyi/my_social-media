@@ -1,7 +1,6 @@
 package com.javadevmz.my_social_media.service;
 
 import com.javadevmz.my_social_media.dao.entity.User;
-import com.javadevmz.my_social_media.dao.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +18,7 @@ public class UserDetailsUserConverter {
                .username(user.getUsername())
                .password(passwordEncoder.encode(user.getPassword()))
                .password(user.getPassword())
-               .authorities(user.getRoles().stream().map(UserRole::getRole).toArray(String[]::new))
+               .authorities(user.getRoles().toArray(String[]::new))
               .build();
     }
 }
