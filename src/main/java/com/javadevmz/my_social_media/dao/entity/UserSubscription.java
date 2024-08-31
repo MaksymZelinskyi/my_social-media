@@ -11,15 +11,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class UserSubscription extends BaseEntity<UserSubscription.Id>{
+public class UserSubscription implements BaseEntity<UserSubscription.Id>{
 
     @EmbeddedId
     Id id;
 
-    @MapsId
+    @MapsId("followerId")
     @ManyToOne
     private User follower;
-    @MapsId
+    @MapsId("subscriptionId")
     @ManyToOne
     private User subscription;
 

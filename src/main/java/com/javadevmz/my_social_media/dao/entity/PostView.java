@@ -10,16 +10,16 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostView extends BaseEntity<PostView.Id>{
+public class PostView implements BaseEntity<PostView.Id>{
 
     @EmbeddedId
     private Id id;
 
-    @MapsId
+    @MapsId("postId")
     @ManyToOne
     private Post post;
 
-    @MapsId
+    @MapsId("userId")
     @ManyToOne
     private User user;
 
@@ -28,7 +28,7 @@ public class PostView extends BaseEntity<PostView.Id>{
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Id implements Serializable {
-        private long postId;
-        private long userId;
+        private Long postId;
+        private Long userId;
     }
 }

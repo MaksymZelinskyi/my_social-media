@@ -1,12 +1,10 @@
 package com.javadevmz.my_social_media.dao.entity;
 
-import com.javadevmz.my_social_media.dao.entity.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "users")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@ToString(exclude = {"entrys", "subscriptions", "followers", "likes", "roles"})
-public class User extends BaseEntity<Long> {
+@ToString(exclude = {"entries", "subscriptions", "followers", "likes"})
+public class User extends AbstractEntity<Long> {
 
     @Email
     @NaturalId

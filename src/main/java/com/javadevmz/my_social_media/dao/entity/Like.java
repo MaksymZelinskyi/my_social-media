@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Table(name="likes")
-public class Like extends BaseEntity<Like.Id> {
+public class Like implements BaseEntity<Like.Id>{
 
     @EmbeddedId
     private Id id;

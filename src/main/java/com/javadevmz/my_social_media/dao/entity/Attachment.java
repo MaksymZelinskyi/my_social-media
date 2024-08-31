@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Attachment extends BaseEntity<Long>{
+public class Attachment extends AbstractEntity<Long> {
 
     private String name;
     private byte[] content;

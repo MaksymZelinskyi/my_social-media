@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
-public abstract class Entry extends BaseEntity<Long>{
+public abstract class Entry extends AbstractEntity<Long> {
 
     private String text;
 
