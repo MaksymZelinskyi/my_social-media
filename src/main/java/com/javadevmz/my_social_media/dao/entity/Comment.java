@@ -18,11 +18,11 @@ public class Comment extends Entry {
     @ManyToOne
     private Entry commented;
 
-    public Comment(String content){
+    public Comment(String content) {
         super(content);
     }
 
-    public Comment(String content, User author, Entry commented){
+    public Comment(String content, User author, Entry commented) {
         super(content);
         this.author = author;
         this.commented = commented;
