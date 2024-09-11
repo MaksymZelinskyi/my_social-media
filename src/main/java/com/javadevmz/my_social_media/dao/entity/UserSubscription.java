@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class UserSubscription implements BaseEntity<UserSubscription.Id>{
+public class UserSubscription implements BaseEntity<UserSubscription.Id> {
 
     @EmbeddedId
     Id id;
