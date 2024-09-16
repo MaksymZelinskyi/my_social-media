@@ -4,6 +4,7 @@ import com.javadevmz.my_social_media.dao.entity.User;
 import com.javadevmz.my_social_media.dao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,9 @@ public class UserManager {
 
     @Autowired
     private UserRepository userRepository;
-    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -29,7 +32,9 @@ public class UserManager {
     }
 
     public User addUser(User user) {
-        return userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user = userRepository.save(user);
+        return user;
     }
 
     public void deleteUser(Long id){
@@ -39,7 +44,7 @@ public class UserManager {
     public User updateUser(Long id, User user){
         User oldUser = getUserById(id);
         oldUser.setEmail(user.getEmail());
-        oldUser.setPassword(user.getPassword());
+        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
         oldUser.setPersonalInfo(user.getPersonalInfo());
         return oldUser;
     }
