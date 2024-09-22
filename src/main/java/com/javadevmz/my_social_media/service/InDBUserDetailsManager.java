@@ -1,5 +1,6 @@
 package com.javadevmz.my_social_media.service;
 
+import com.javadevmz.my_social_media.converter.UserDetailsUserConverter;
 import com.javadevmz.my_social_media.dao.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ public class InDBUserDetailsManager implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         User user = userManager.getUserByUsername(username);
         return userDetailsUserConverter.convertUserToUserDetails(user);
     }

@@ -1,9 +1,11 @@
 package com.javadevmz.my_social_media.controller;
 
+import com.javadevmz.my_social_media.dao.dto.AuthenticationRequest;
 import com.javadevmz.my_social_media.dao.entity.Post;
 import com.javadevmz.my_social_media.dao.entity.User;
 import com.javadevmz.my_social_media.service.PostManager;
 import com.javadevmz.my_social_media.service.UserManager;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 public class HomeController {
 
+    @Autowired
+    private Logger logger;
     @Autowired
     private PostManager postManager;
     @Autowired
@@ -27,16 +32,20 @@ public class HomeController {
 
     @GetMapping("/popular")
     public List<Post> getPopularPosts(){
-        return postManager.get25MostPopularPosts();
+        List<Post> posts = postManager.get25MostPopularPosts();
+        postManager.markPostsAsSeen(posts);
+        return posts;
     }
 
     @GetMapping("/login")
-    public void login(){
+    public void login(AuthenticationRequest authenticationRequest){
 
     }
 
     @PostMapping("/sign-up")
-    public void register(@RequestBody User user){
+    public void  register(@Valid @RequestBody User user){
+        logger.info(user.getUsername() + " is being registered");
         userManager.addUser(user);
+        logger.info(user.getUsername() + " has been registered");
     }
 }
