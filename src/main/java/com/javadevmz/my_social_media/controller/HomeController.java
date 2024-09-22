@@ -37,7 +37,7 @@ public class HomeController {
         return posts;
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public void login(AuthenticationRequest authenticationRequest){
 
     }
