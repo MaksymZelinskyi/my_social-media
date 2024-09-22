@@ -53,4 +53,12 @@ public class UserManager {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getUserByUsername(username);
     }
+
+    public long getFolowersCount(Long userId){
+        return userRepository.countUserFollowers(userId);
+    }
+
+    public long getSubscriptionsCount(Long userId){
+        return userRepository.countUserSubscriptions(userId);
+    }
 }

@@ -1,4 +1,4 @@
-package com.javadevmz.my_social_media.service;
+package com.javadevmz.my_social_media.converter;
 
 import com.javadevmz.my_social_media.dao.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

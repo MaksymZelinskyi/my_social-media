@@ -8,18 +8,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController("/posts")
-@Transactional
 public class PostController {
 
     @Autowired
     PostEntityManager postEntityManager;
     @Autowired
     private CommentManager commentManager;
+    @Autowired
+    private Logger logger;
 
     @PostMapping("/posts")
     public Post postPost(@RequestBody Post post) {
+        logger.info("Post created: " + post);
         postEntityManager.savePost(post);
         return post;
     }

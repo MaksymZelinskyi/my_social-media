@@ -1,5 +1,6 @@
 package com.javadevmz.my_social_media.service.paging;
 
+import com.javadevmz.my_social_media.dao.entity.AbstractEntity;
 import com.javadevmz.my_social_media.dao.entity.BaseEntity;
 import lombok.Getter;
 import org.springframework.data.domain.*;

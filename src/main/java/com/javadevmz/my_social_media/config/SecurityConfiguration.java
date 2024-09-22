@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,12 +31,8 @@ public class SecurityConfiguration {
                     .requestMatchers("/sign-up").permitAll()
                     .anyRequest().permitAll();
        })
-               .csrf(new Customizer<CsrfConfigurer<HttpSecurity>>() {
-                   @Override
-                   public void customize(CsrfConfigurer<HttpSecurity> csrfConfigurer) {
-                       csrfConfigurer.disable();
-                   }
-               })
+               .cors(cors -> corsConfig())
+               .csrf(AbstractHttpConfigurer::disable)
                .httpBasic(Customizer.withDefaults())
                .build();
     }

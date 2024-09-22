@@ -19,4 +19,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " order by us.subscriptionTime desc")
     List<UserDto> findUserSubscriptions(Long userId, LocalDateTime previousSubscriptionTime, Pageable pageable);
 
+    @Query("select count(*) from UserSubscription us where us.subscription.id = :userId")
+    long countUserFollowers(Long userId);
+
+    @Query("select count(*) from UserSubscription us where us.follower.id = :userId")
+    long countUserSubscriptions(Long userId);
 }

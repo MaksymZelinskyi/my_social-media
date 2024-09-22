@@ -16,6 +16,5 @@ public class Attachment extends AbstractEntity<Long> {
 
     private String name;
     private byte[] content;
-    @Enumerated
-    private MediaType mediaType;
+    private String mediaType;
 }

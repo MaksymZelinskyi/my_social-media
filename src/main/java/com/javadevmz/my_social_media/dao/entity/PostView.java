@@ -23,6 +23,11 @@ public class PostView implements BaseEntity<PostView.Id>{
     @ManyToOne
     private User user;
 
+    public PostView(Post post, User user) {
+        this.post = post;
+        this.user = user;
+        this.id = new Id(post.getId(), user.getId());
+    }
     @Data
     @Embeddable
     @NoArgsConstructor

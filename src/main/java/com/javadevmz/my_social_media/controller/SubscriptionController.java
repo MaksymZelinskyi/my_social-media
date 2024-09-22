@@ -14,7 +14,7 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionManager subscriptionManager;
 
-    @GetMapping("/sunscriptions")
+    @GetMapping("/suncriptions")
     public List<UserDto> getSubscriptions(@RequestParam(required = false) LocalDateTime previousSubscriptionTime,
                                           @RequestParam int count) {
         if (previousSubscriptionTime == null) {

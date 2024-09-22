@@ -1,4 +1,4 @@
-package com.javadevmz.my_social_media.dao.converter;
+package com.javadevmz.my_social_media.converter;
 
 import com.javadevmz.my_social_media.dao.entity.Birthday;
 import jakarta.persistence.AttributeConverter;
