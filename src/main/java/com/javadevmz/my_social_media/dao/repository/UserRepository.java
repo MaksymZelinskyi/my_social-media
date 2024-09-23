@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
 
-    @Query("select new com.javadevmz.my_social_media.dao.dto.UserDto(us.subscription.username, us.subscription.profilePicture)" +
+    @Query("select new com.javadevmz.my_social_media.dao.dto.UserDto(us.subscription.id, us.subscription.username, us.subscription.profilePicture)" +
             " from UserSubscription us where us.follower.id=:userId and us.subscriptionTime < :previousSubscriptionTime" +
             " order by us.subscriptionTime desc")
     List<UserDto> findUserSubscriptions(Long userId, LocalDateTime previousSubscriptionTime, Pageable pageable);
@@ -24,4 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select count(*) from UserSubscription us where us.follower.id = :userId")
     long countUserSubscriptions(Long userId);
+
+    @Query("select new com.javadevmz.my_social_media.dao.dto.UserDto(u.id, u.username, u.profilePicture) from User u where u.username like :pattern")
+    List<UserDto> findUsersByUsernameLike(String pattern);
 }
