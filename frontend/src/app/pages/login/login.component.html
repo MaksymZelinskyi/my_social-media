@@ -1,0 +1,9 @@
+<div>
+  <label for="username">Who r u?</label>
+  <input [(ngModel)]="userAuth.username" type="text" placeholder="username" id="username"/>
+  <label for="password">Prove it!</label>
+  <input [(ngModel)]="userAuth.password" type="password" placeholder="password" id="password"/>
+  <button (click)="login()" type="button">Log In</button>
+  <p>Do not have an account?</p>
+  <button routerLink="/sign-up">Register</button>
+</div>

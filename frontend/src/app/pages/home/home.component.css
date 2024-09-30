@@ -1,0 +1,24 @@
+fa-icon{
+  display: inline;
+  padding-right:100px;
+  padding-left:100px;
+  margin-left:50px;
+
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+}
+
+.content{
+  flex-grow: 1
+}
+
+footer{
+  width: 100%;
+  background: royalblue;
+  position: absolute;
+  bottom: 0;
+  position: fixed;
+}

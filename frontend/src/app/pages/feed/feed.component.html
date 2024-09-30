@@ -1,0 +1,6 @@
+ <header>
+   <button class="column" (click)="onSelectPopular()">Trending</button> <button class="column" (click)="onSelectFollowing()">Following</button>
+ </header>
+  <div  *ngFor="let post of posts">
+    <app-post [post]="post"/>
+  </div>

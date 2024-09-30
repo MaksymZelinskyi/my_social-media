@@ -1,0 +1,17 @@
+<div>
+  <input [(ngModel)]="user.email" type="email" placeholder="your@email.com"/>
+  <input [(ngModel)]="user.password" type="text" placeholder="password"/>
+  <input [(ngModel)]="user.username" type="text" placeholder="username"/>
+  <input [(ngModel)]="user.personalInfo?.firstName" type="text" placeholder="First Name"/>
+  <input [(ngModel)]="user.personalInfo?.lastName" type="text" placeholder="Last Name"/>
+  <input [(ngModel)]="user.personalInfo?.birthDate" type="date" placeholder="31/08/2024"/>
+  <input [(ngModel)]="profilePicture" (change)="uploadProfilePicture()" type="file"/>
+   <select [(ngModel)]="user.personalInfo?.gender">
+    <option [ngValue]="'MALE'">Male</option>
+    <option [ngValue]="'FEMALE'">Female</option>
+    <option [ngValue]="'CONCEALED'">Don't wish to expose</option>
+  </select>
+  <button (click)="signUp()">Sign up</button>
+
+  <h6>{{user.username}}</h6>
+</div>

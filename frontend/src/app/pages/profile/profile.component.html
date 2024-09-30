@@ -1,0 +1,12 @@
+<div>
+  <h1>{{user.username}}</h1>
+  <div>
+  <!-- TODO --><img>
+  <h4 style="white-space: nowrap">{{user.followersCount}}</h4>
+  <h4 style="white-space: nowrap">{{user.subscriptionsCount}}</h4>
+  </div>
+  <button (click)="subscribe()">Subscribe</button>
+  <div  *ngFor="let post of posts">
+    <app-post [post]="post"></app-post>
+  </div>
+</div>

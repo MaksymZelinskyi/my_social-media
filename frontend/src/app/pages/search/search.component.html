@@ -1,0 +1,16 @@
+<div>
+  <form>
+  <input [(ngModel)]="query" type="text"/>
+    <button class="column" (click)="searchUser()" [disabled]="!queryForm.controls.query">Search User</button>
+    <button class="column" (click)="searchPost()" [disabled]="!queryForm.controls.query">Search Post</button>
+  </form>
+  <div *ngIf="foundUsers">
+    <app-users [users]="foundUsers"/>
+  </div>
+
+  <div *ngIf="foundPosts">
+    <div *ngFor="let post of foundPosts">
+      <app-post [post]="post"/>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<td>{{post.post?.title}}</td>
+<td>{{post.post?.text}}</td>
+<td>{{post.post?.attachment?.content}}</td>
+<td>{{post.post?.author?.username}}</td>
+<button (click)="likePost()"><fa-icon [class]="faThumbsUp"/></button>
+<h3>Comments</h3>
+<input type="text" [(ngModel)]="comment.text" />
+<input type="file" [(ngModel)]="attachment"/>
+<button (click)="sendComment()">Send comment</button>
+<button (click)="showComments=true">Show comments</button>
+<app-comment [hidden]="!showComments" [commentedId]="post.post?.id || 0" />

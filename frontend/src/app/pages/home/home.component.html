@@ -1,0 +1,28 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="content">
+  <div *ngIf="currentPage=='feed'">
+    <app-feed></app-feed>
+  </div>
+  <div *ngIf="currentPage=='add-post'">
+    <app-addpost></app-addpost>
+  </div>
+  <div *ngIf="currentPage=='view-profile'">
+    <app-profile [userId]="Number.parseInt(localStorage.getItem('currentId') || '0')"/>
+  </div>
+  <div *ngIf="currentPage=='search'">
+    <app-search/>
+  </div>
+</div>
+</body>
+<footer>
+  <fa-icon [icon]="faPlus" (click)="currentPage='add-post'" size="7x"/>
+
+  <fa-icon [icon]="faEye" (click)="currentPage='feed'" size="7x"/>
+
+  <fa-icon [icon]="faIdCard" (click)="currentPage='view-profile'" size="7x"/>
+
+  <fa-icon [icon]="faEarthEurope" (click)="currentPage='search'" size="7x"/>
+</footer>

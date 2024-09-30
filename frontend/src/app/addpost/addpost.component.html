@@ -1,0 +1,24 @@
+  <head>
+    New post
+  </head>
+    <div>
+      <label for="title">Title: </label>
+      <br>
+      <input [(ngModel)]="post?.title" type="text" id="title"/>
+    </div>
+    <br>
+    <div>
+      <label for="text">Text: </label>
+      <br>
+      <input [(ngModel)]="post?.text" type="text" id="text" style="width: 80%; height: 200px"/>
+    </div>
+    <br>
+    <div>
+      <label for="attachment" style="margin-top: 70px">Upload an attachment </label>
+      <input (change)="addAttachment($event)" [(ngModel)]="attachment" type="file" id="attachment"/>
+    </div>
+
+    <button (click)="upload()">Upload</button>
+
+
+

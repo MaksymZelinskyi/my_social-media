@@ -1,0 +1,15 @@
+
+<div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="150" (scrolled)="getComments()">
+  <div  *ngFor="let comment of getComments()">
+
+    <td>{{comment.text}}</td>
+    <td>{{comment.attachment?.content}}</td>
+    <td>{{comment.author?.username}}</td>
+
+    <button (click)="showComments=true">Comments</button>
+    <input [(ngModel)]="comment.text" type = "text"/>
+    <button (click)="sendComment()">Send comment</button>
+    <button (click)="showComments=true">Show responses</button>
+  <app-comment [hidden]="!showComments" [commentedId] = "comment.id ?? 0"/>
+  </div>
+</div>
