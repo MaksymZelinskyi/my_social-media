@@ -27,17 +27,17 @@ public class CommentController {
         return commentManager.getById(postId);
     }
 
-    @PostMapping("/posts/{postId}/comments")
-    public Comment addPostComment(@PathVariable Long postId, @RequestBody Comment comment) {
-       return commentManager.add(postId, comment);
+   @PostMapping({"/posts/{commented_id}/comments","/posts/{postId}/comments/{commented_id}/responses"})
+   public Comment addComment(@PathVariable("commented_id") Long commentedId, @RequestBody Comment comment) {
+        return commentManager.add(commentedId, comment);
    }
 
-    @PutMapping("/posts/{postId}/comments/{id}")
-    public Comment updatePostComment(@PathVariable("id") Long id, @RequestBody Comment comment) {
+    @PutMapping({"/posts/{commented_Id}/comments/{id}", "/posts/{postId}/comments/{commented_id}/responses/{id}"})
+    public Comment updateComment(@PathVariable("commented_id") Long id, @RequestBody Comment comment) {
         return commentManager.update(id, comment);
    }
 
-    @DeleteMapping("/posts/{postId}/comments/{id}")
+    @DeleteMapping({"/posts/{commented_Id}/comments/{id}", "/posts/{postId}/comments/{commented_id}/responses/{id}"})
     public void deletePostComment(@PathVariable("id") Long id) {
         commentManager.deleteById(id);
    }

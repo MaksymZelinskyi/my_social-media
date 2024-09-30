@@ -1,11 +1,13 @@
 package com.javadevmz.my_social_media.dao.repository;
 
 import com.javadevmz.my_social_media.dao.entity.Comment;
+import com.javadevmz.my_social_media.dao.entity.Entry;
 import com.javadevmz.my_social_media.dao.entity.Post;
 import com.javadevmz.my_social_media.dao.entity.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -48,5 +50,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post p where p.author.id = :authorId and p.publishedTime < :publishedTime order by p.publishedTime desc limit :count")
     List<Post> findAllByAuthorIdAndPublishedTimeBefore(Long authorId, LocalDateTime publishedTime, int count);
+
+    @Query("select p from Post p where p.title like '%:pattern%'")
+    List<Post> findAllByTitleLike(String pattern);
 
 }

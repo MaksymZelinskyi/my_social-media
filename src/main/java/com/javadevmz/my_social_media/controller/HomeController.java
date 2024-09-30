@@ -1,6 +1,7 @@
 package com.javadevmz.my_social_media.controller;
 
 import com.javadevmz.my_social_media.dao.dto.AuthenticationRequest;
+import com.javadevmz.my_social_media.dao.dto.PostDto;
 import com.javadevmz.my_social_media.dao.entity.Post;
 import com.javadevmz.my_social_media.dao.entity.User;
 import com.javadevmz.my_social_media.service.PostManager;
@@ -26,26 +27,25 @@ public class HomeController {
     private UserManager userManager;
 
     @GetMapping("/following")
-    public List<Post> getPostsOfFollowing(){
+    public List<PostDto> getPostsOfFollowing(){
         return postManager.get20PostsOfFriends();
     }
 
     @GetMapping("/popular")
-    public List<Post> getPopularPosts(){
-        List<Post> posts = postManager.get25MostPopularPosts();
+    public List<PostDto> getPopularPosts(){
+        List<PostDto> posts = postManager.get25MostPopularPosts();
         postManager.markPostsAsSeen(posts);
         return posts;
     }
 
     @PostMapping("/login")
-    public void login(AuthenticationRequest authenticationRequest){
-
+    public Long login(AuthenticationRequest authenticationRequest){
+        return userManager.getCurrentUser().getId();
     }
 
     @PostMapping("/sign-up")
-    public void  register(@Valid @RequestBody User user){
-        logger.info(user.getUsername() + " is being registered");
+    public Long register(@Valid @RequestBody User user){
         userManager.addUser(user);
-        logger.info(user.getUsername() + " has been registered");
+        return user.getId();
     }
 }

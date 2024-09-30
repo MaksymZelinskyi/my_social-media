@@ -2,6 +2,7 @@ package com.javadevmz.my_social_media.service;
 
 import com.javadevmz.my_social_media.dao.entity.User;
 import com.javadevmz.my_social_media.dao.repository.UserRepository;
+import com.javadevmz.my_social_media.dao.repository.UserSubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,7 @@ public class UserManager {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private UserSubscriptionRepository userSubscriptionRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -55,10 +57,11 @@ public class UserManager {
     }
 
     public long getFolowersCount(Long userId){
-        return userRepository.countUserFollowers(userId);
+        return userSubscriptionRepository.countUserFollowers(userId);
     }
 
     public long getSubscriptionsCount(Long userId){
-        return userRepository.countUserSubscriptions(userId);
+        return userSubscriptionRepository.countUserSubscriptions(userId);
     }
+
 }

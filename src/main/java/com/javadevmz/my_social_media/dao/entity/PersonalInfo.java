@@ -1,6 +1,6 @@
 package com.javadevmz.my_social_media.dao.entity;
 
-import com.javadevmz.my_social_media.converter.BirthdayLocalDateConverter;
+import com.javadevmz.my_social_media.service.converter.BirthdayLocalDateConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

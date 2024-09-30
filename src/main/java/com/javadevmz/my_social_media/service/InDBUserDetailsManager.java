@@ -1,6 +1,6 @@
 package com.javadevmz.my_social_media.service;
 
-import com.javadevmz.my_social_media.converter.UserDetailsUserConverter;
+import com.javadevmz.my_social_media.service.converter.UserDetailsUserConverter;
 import com.javadevmz.my_social_media.dao.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

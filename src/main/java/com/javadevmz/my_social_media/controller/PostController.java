@@ -1,5 +1,6 @@
 package com.javadevmz.my_social_media.controller;
 
+import com.javadevmz.my_social_media.dao.dto.PostDto;
 import com.javadevmz.my_social_media.dao.entity.Post;
 import com.javadevmz.my_social_media.service.CommentManager;
 import com.javadevmz.my_social_media.service.PostEntityManager;
@@ -28,7 +29,7 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public List<Post> getAllPosts() {
+    public List<PostDto> getAllPosts() {
         return postEntityManager.getAllPosts();
     }
 

@@ -34,23 +34,14 @@ public class LikeController {
         return likeManager.getLikeCountByMediaId(commentId);
     }
 
-    @PostMapping("/posts/{postId}/likes")
-    public void likePost(@PathVariable Long postId){
+    @PostMapping({"/posts/{likedId}/likes", "/posts/{postId}/comments/{likedId}/likes"})
+    public void addLike(@PathVariable Long postId){
         likeManager.addLike(postId);
     }
 
-    @PostMapping("/posts/{postId}/comments/{commentId}/likes")
-    public void likeComment(@PathVariable Long commentId){
-        likeManager.addLike(commentId);
+    @DeleteMapping({"/posts/{likedId}/likes", "/posts/{postId}/comments/{likedId}/likes"})
+    public void unlike(@PathVariable Long likedId){
+        likeManager.deleteLike(likedId);
     }
 
-    @DeleteMapping("/posts/{postId}/likes")
-    public void deletePostLike(@PathVariable Long postId){
-        likeManager.deleteLike(postId);
-    }
-
-    @DeleteMapping("/posts/{postId}/comments/{commentId}/likes")
-    public void deleteCommentLike(@PathVariable Long commentId){
-        likeManager.deleteLike(commentId);
-    }
 }
