@@ -19,7 +19,7 @@ export class AddpostComponent {
                   private router: Router){
       }
 
-      post?: Post = {
+      post: Post = {
         attachment: undefined,
         author: undefined,
         id: 0,

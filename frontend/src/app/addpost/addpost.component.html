@@ -1,24 +1,36 @@
-  <head>
-    New post
-  </head>
-    <div>
-      <label for="title">Title: </label>
-      <br>
-      <input [(ngModel)]="post?.title" type="text" id="title"/>
-    </div>
-    <br>
-    <div>
-      <label for="text">Text: </label>
-      <br>
-      <input [(ngModel)]="post?.text" type="text" id="text" style="width: 80%; height: 200px"/>
-    </div>
-    <br>
-    <div>
-      <label for="attachment" style="margin-top: 70px">Upload an attachment </label>
-      <input (change)="addAttachment($event)" [(ngModel)]="attachment" type="file" id="attachment"/>
-    </div>
+<h1>New Post</h1>
 
-    <button (click)="upload()">Upload</button>
+<div>
+  <label for="title">Title:</label><br/>
+  <div *ngIf="post">
+    <input [(ngModel)]="post.title" type="text" id="title" name="title">
+  </div>
+</div>
 
+<br/>
 
+<div>
+  <label for="text">Text:</label><br/>
+  <textarea
+    [(ngModel)]="post.text"
+    id="text"
+    name="text"
+    style="width: 80%; height: 200px"
+  ></textarea>
+</div>
 
+<br/>
+
+<div>
+  <label for="attachment" style="margin-top: 20px">Upload an attachment:</label><br />
+  <input
+    type="file"
+    id="attachment"
+    name="attachment"
+    (change)="addAttachment($event)"
+  />
+</div>
+
+<br />
+
+<button (click)="upload()">Upload</button>
